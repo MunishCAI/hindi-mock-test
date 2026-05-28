@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hindi Mock Test — Gnanaguru Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a237e;
+    --blue: #283593;
+    --indigo: #3949ab;
+    --light-blue: #e8eaf6;
+    --green: #1b5e20;
+    --light-green: #e8f5e9;
+    --red: #b71c1c;
+    --light-red: #fce4ec;
+    --purple: #4a148c;
+    --light-purple: #f3e5f5;
+    --orange: #e65100;
+    --gold: #f57f17;
+    --white: #ffffff;
+    --bg: #f0f2ff;
+    --text: #1a1a2e;
+    --muted: #555577;
+    --border: #c5cae9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .hindi { font-family: 'Noto Sans Devanagari', sans-serif; }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+    color: white;
+    padding: 32px 24px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.07) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+  }
+  .header-logo {
+    font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    opacity: 0.8; margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: clamp(22px, 5vw, 34px);
+    font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px;
+  }
+  .header p { font-size: 14px; opacity: 0.85; margin-bottom: 20px; }
+
+  .info-bar {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .info-chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px; padding: 6px 16px;
+    font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ── SCORE BAR ── */
+  .score-bar {
+    background: white;
+    border-bottom: 2px solid var(--border);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(26,35,126,0.1);
+  }
+  .score-display {
+    font-size: 15px; font-weight: 700; color: var(--navy);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .score-num { font-size: 22px; color: var(--green); }
+  .score-actions { display: flex; gap: 8px; }
+  .btn {
+    padding: 8px 18px; border-radius: 8px; border: none;
+    font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .btn-primary { background: var(--navy); color: white; }
+  .btn-primary:hover { background: var(--indigo); transform: translateY(-1px); }
+  .btn-secondary { background: var(--light-blue); color: var(--navy); }
+  .btn-secondary:hover { background: var(--border); }
+  .btn-green { background: var(--green); color: white; }
+  .btn-green:hover { background: #2e7d32; transform: translateY(-1px); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px 48px; }
+
+  /* ── SECTION ── */
+  .section {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 16px rgba(26,35,126,0.08);
+    border: 1px solid var(--border);
+  }
+  .section-header {
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .section-header h2 {
+    font-size: 15px; font-weight: 700; color: white;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-header .marks-badge {
+    background: rgba(255,255,255,0.25);
+    border-radius: 12px; padding: 3px 10px;
+    font-size: 12px; font-weight: 600; color: white;
+  }
+  .sec-a .section-header { background: linear-gradient(90deg, #1a237e, #283593); }
+  .sec-b .section-header { background: linear-gradient(90deg, #283593, #1565c0); }
+  .sec-c .section-header { background: linear-gradient(90deg, #1565c0, #0277bd); }
+  .sec-d .section-header { background: linear-gradient(90deg, #0d47a1, #1565c0); }
+  .sec-e .section-header { background: linear-gradient(90deg, #1b5e20, #2e7d32); }
+  .sec-f .section-header { background: linear-gradient(90deg, #4a148c, #6a1b9a); }
+  .sec-bonus .section-header { background: linear-gradient(90deg, #b71c1c, #c62828); }
+
+  .section-body { padding: 18px 20px; }
+  .instructions {
+    font-size: 13px; color: var(--muted); margin-bottom: 14px;
+    padding: 10px 14px;
+    background: var(--light-blue); border-radius: 8px;
+    border-left: 3px solid var(--indigo);
+  }
+
+  /* ── MATCH TABLE (Section A) ── */
+  .match-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .match-table th {
+    background: var(--light-blue); color: var(--navy);
+    padding: 10px 12px; font-weight: 700; text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+  .match-table td {
+    padding: 9px 12px; border-bottom: 1px solid #e8eaf6;
+    vertical-align: middle;
+  }
+  .match-table tr:last-child td { border-bottom: none; }
+  .match-table tr:hover td { background: #f8f9ff; }
+  .match-table .hindi-cell {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 16px; color: var(--purple);
+  }
+  .match-input {
+    width: 80px; padding: 5px 8px;
+    border: 2px solid var(--border); border-radius: 6px;
+    font-family: 'Poppins', sans-serif; font-size: 13px;
+    text-align: center; text-transform: uppercase;
+    transition: border-color 0.2s;
+  }
+  .match-input:focus { outline: none; border-color: var(--indigo); }
+  .match-input.correct { border-color: var(--green); background: var(--light-green); }
+  .match-input.wrong { border-color: var(--red); background: #fff8f8; }
+
+  /* ── MCQ ── */
+  .mcq-grid { display: grid; gap: 14px; }
+  .mcq-item {
+    border: 1.5px solid var(--border); border-radius: 10px;
+    padding: 14px 16px; transition: border-color 0.2s;
+  }
+  .mcq-item:hover { border-color: var(--indigo); }
+  .mcq-question {
+    font-size: 14px; font-weight: 600; color: var(--navy);
+    margin-bottom: 10px; display: flex; align-items: flex-start; gap: 8px;
+  }
+  .mcq-question .qnum {
+    background: var(--navy); color: white;
+    width: 22px; height: 22px; border-radius: 50%;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .mcq-question .hindi {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 17px; color: var(--purple);
+  }
+  .mcq-options { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .mcq-option {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 8px;
+    border: 1.5px solid var(--border); cursor: pointer;
+    font-size: 13px; transition: all 0.15s; user-select: none;
+  }
+  .mcq-option:hover { border-color: var(--indigo); background: var(--light-blue); }
+  .mcq-option.selected { border-color: var(--indigo); background: var(--light-blue); }
+  .mcq-option.correct-ans { border-color: var(--green) !important; background: var(--light-green) !important; color: var(--green); font-weight: 600; }
+  .mcq-option.wrong-ans { border-color: var(--red) !important; background: #fff0f0 !important; color: var(--red); }
+  .opt-label {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--light-blue); color: var(--navy);
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── FILL IN BLANK ── */
+  .fill-list { display: grid; gap: 10px; }
+  .fill-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 14px; border-radius: 10px;
+    border: 1.5px solid var(--border); font-size: 13.5px;
+  }
+  .fill-num {
+    background: var(--indigo); color: white;
+    min-width: 26px; height: 26px; border-radius: 6px;
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .fill-text { flex: 1; line-height: 1.6; }
+  .fill-input {
+    display: inline-block;
+    border: none; border-bottom: 2px solid var(--indigo);
+    font-family: 'Poppins', sans-serif; font-size: 13.5px;
+    color: var(--purple); width: 140px; padding: 0 4px;
+    background: transparent; text-align: center;
+  }
+  .fill-input:focus { outline: none; border-bottom-color: var(--navy); }
+  .fill-ans {
+    font-size: 12px; color: var(--green); font-weight: 600;
+    display: none; margin-top: 4px;
+  }
+
+  /* ── VERB TABLE ── */
+  .verb-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-bottom: 18px; }
+  .verb-table th {
+    background: #e3f2fd; color: #0d47a1;
+    padding: 9px 10px; font-weight: 700; text-align: left;
+    border: 1px solid #bbdefb;
+  }
+  .verb-table td {
+    padding: 8px 10px; border: 1px solid #e3f2fd; vertical-align: middle;
+  }
+  .verb-table tr:nth-child(even) td { background: #f8fbff; }
+  .verb-table .hindi-cell {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 14px; color: var(--purple);
+  }
+
+  /* ── TENSE FILL ── */
+  .tense-item {
+    margin-bottom: 14px;
+    padding: 12px 16px; border-radius: 10px;
+    border: 1.5px solid var(--border);
+  }
+  .tense-q { font-size: 13.5px; font-weight: 600; margin-bottom: 8px; color: var(--navy); }
+  .tense-q .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 11px; margin-left: 6px; font-weight: 500;
+  }
+  .badge-present { background: #e3f2fd; color: #0d47a1; }
+  .badge-past { background: #fff3e0; color: #e65100; }
+  .badge-future { background: #e8f5e9; color: #1b5e20; }
+  .tense-write {
+    width: 100%; padding: 8px 12px;
+    border: 2px solid var(--border); border-radius: 8px;
+    font-family: 'Noto Sans Devanagari', sans-serif; font-size: 15px;
+    color: var(--purple); transition: border-color 0.2s;
+  }
+  .tense-write:focus { outline: none; border-color: var(--indigo); }
+  .tense-hint {
+    font-size: 11.5px; color: var(--green); margin-top: 6px;
+    display: none; font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px;
+  }
+
+  /* ── TRANSLATE TABLE ── */
+  .trans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .trans-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 8px;
+    border: 1.5px solid var(--border); font-size: 13px;
+  }
+  .trans-num {
+    background: var(--light-purple); color: var(--purple);
+    min-width: 24px; height: 24px; border-radius: 5px;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .trans-input {
+    flex: 1; border: none; border-bottom: 1.5px solid var(--border);
+    font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px;
+    color: var(--purple); background: transparent; padding: 0 2px;
+  }
+  .trans-input:focus { outline: none; border-bottom-color: var(--purple); }
+
+  /* ── BONUS GRID ── */
+  .bonus-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; }
+  .bonus-item {
+    padding: 10px 12px; border-radius: 8px;
+    border: 1.5px solid #ffcdd2; background: #fff8f8;
+    font-size: 13px;
+  }
+  .bonus-item .eng { font-weight: 600; color: var(--red); margin-bottom: 4px; font-size: 12.5px; }
+  .bonus-ans-input {
+    width: 100%; border: none; border-bottom: 1.5px solid #ffcdd2;
+    font-family: 'Noto Sans Devanagari', sans-serif; font-size: 14px;
+    color: var(--purple); background: transparent; padding: 0;
+  }
+  .bonus-ans-input:focus { outline: none; border-bottom-color: var(--red); }
+
+  /* ── ANSWER KEY PANEL ── */
+  .ans-key {
+    margin-top: 14px; padding: 10px 14px;
+    background: var(--light-green); border-radius: 8px;
+    border-left: 3px solid var(--green);
+    font-size: 12.5px; color: var(--green); font-weight: 600;
+    display: none;
+  }
+  .show-ans-btn {
+    margin-top: 12px; padding: 7px 16px;
+    border-radius: 8px; border: 1.5px solid var(--green);
+    background: white; color: var(--green);
+    font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .show-ans-btn:hover { background: var(--light-green); }
+
+  /* ── RESULT PANEL ── */
+  .result-panel {
+    display: none;
+    background: white; border-radius: 16px;
+    border: 2px solid var(--green);
+    padding: 28px; text-align: center;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 24px rgba(27,94,32,0.15);
+  }
+  .result-panel h2 { font-size: 24px; color: var(--navy); margin-bottom: 8px; }
+  .result-score { font-size: 48px; font-weight: 800; color: var(--green); line-height: 1; }
+  .result-grade { font-size: 18px; color: var(--muted); margin: 8px 0 16px; }
+  .result-msg { font-size: 14px; color: var(--navy); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .mcq-options { grid-template-columns: 1fr; }
+    .trans-grid { grid-template-columns: 1fr; }
+    .bonus-grid { grid-template-columns: repeat(2, 1fr); }
+    .score-bar { padding: 10px 14px; }
+  }
+
+  /* ── PROGRESS ── */
+  .progress-bar {
+    height: 4px; background: var(--light-blue);
+    position: relative; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--indigo), var(--green));
+    transition: width 0.4s ease; width: 0%;
+  }
+
+  .correct-badge {
+    display: none; margin-left: 6px;
+    color: var(--green); font-size: 13px; font-weight: 700;
+  }
+
+  hr.divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 14px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-logo">🌙 Gnanaguru Academy</div>
+  <h1>Hindi Mock Test</h1>
+  <p>Learn Hindi through English &nbsp;|&nbsp; Based on your Gnanaguru Academy study material</p>
+  <div class="info-bar">
+    <div class="info-chip">📋 Total: 100 Marks</div>
+    <div class="info-chip">⏱ Time: 60 Minutes</div>
+    <div class="info-chip">✅ Answers included</div>
+  </div>
+</div>
+
+<!-- STICKY SCORE BAR -->
+<div class="score-bar">
+  <div class="score-display">
+    Score: <span class="score-num" id="liveScore">0</span> / <span id="maxScore">100</span>
+  </div>
+  <div class="score-actions">
+    <button class="btn btn-secondary" onclick="showAllAnswers()">👁 Show All Answers</button>
+    <button class="btn btn-primary" onclick="checkAll()">✅ Check All</button>
+    <button class="btn btn-green" onclick="showResult()">🏆 See Result</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="container">
+
+<!-- RESULT PANEL -->
+<div class="result-panel" id="resultPanel">
+  <h2>🎉 Your Result</h2>
+  <div class="result-score" id="finalScore">0</div>
+  <div class="result-grade" id="resultGrade">/ 100</div>
+  <div class="result-msg" id="resultMsg"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION A — Match the Meaning
+══════════════════════════════════════════ -->
+<div class="section sec-a">
+  <div class="section-header">
+    <h2>📝 SECTION A — Match the Meaning</h2>
+    <span class="marks-badge">20 Marks</span>
+  </div>
+  <div class="section-body">
+    <div class="instructions">Match the Hindi word (with pronunciation) to its correct English meaning from Column B. Write the letter (A–J) in "Your Answer".</div>
+    <table class="match-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Hindi Word</th>
+          <th>Column B (English)</th>
+          <th>Your Answer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td class="hindi-cell">सिर <span style="font-family:Poppins;font-size:12px;color:#888">(Sir)</span></td><td>A. Ear</td><td><input class="match-input" id="m1" maxlength="1" placeholder="?" data-ans="B"></td></tr>
+        <tr><td>2</td><td class="hindi-cell">आँख <span style="font-family:Poppins;font-size:12px;color:#888">(Aankh)</span></td><td>B. Head</td><td><input class="match-input" id="m2" maxlength="1" placeholder="?" data-ans="C"></td></tr>
+        <tr><td>3</td><td class="hindi-cell">कान <span style="font-family:Poppins;font-size:12px;color:#888">(Kaan)</span></td><td>C. Eye</td><td><input class="match-input" id="m3" maxlength="1" placeholder="?" data-ans="A"></td></tr>
+        <tr><td>4</td><td class="hindi-cell">मुँह <span style="font-family:Poppins;font-size:12px;color:#888">(Munh)</span></td><td>D. Nose</td><td><input class="match-input" id="m4" maxlength="1" placeholder="?" data-ans="E"></td></tr>
+        <tr><td>5</td><td class="hindi-cell">नाक <span style="font-family:Poppins;font-size:12px;color:#888">(Naak)</span></td><td>E. Mouth</td><td><input class="match-input" id="m5" maxlength="1" placeholder="?" data-ans="D"></td></tr>
+        <tr><td>6</td><td class="hindi-cell">हाथ <span style="font-family:Poppins;font-size:12px;color:#888">(Haath)</span></td><td>F. Stomach</td><td><input class="match-input" id="m6" maxlength="1" placeholder="?" data-ans="G"></td></tr>
+        <tr><td>7</td><td class="hindi-cell">पेट <span style="font-family:Poppins;font-size:12px;color:#888">(Pet)</span></td><td>G. Hand</td><td><input class="match-input" id="m7" maxlength="1" placeholder="?" data-ans="F"></td></tr>
+        <tr><td>8</td><td class="hindi-cell">पाँव <span style="font-family:Poppins;font-size:12px;color:#888">(Paanv)</span></td><td>H. Finger</td><td><input class="match-input" id="m8" maxlength="1" placeholder="?" data-ans="I"></td></tr>
+        <tr><td>9</td><td class="hindi-cell">उँगली <span style="font-family:Poppins;font-size:12px;color:#888">(Ungli)</span></td><td>I. Foot</td><td><input class="match-input" id="m9" maxlength="1" placeholder="?" data-ans="H"></td></tr>
+        <tr><td>10</td><td class="hindi-cell">दिल <span style="font-family:Poppins;font-size:12px;color:#888">(Dil)</span></td><td>J. Heart</td><td><input class="match-input" id="m10" maxlength="1" placeholder="?" data-ans="J"></td></tr>
+      </tbody>
+    </table>
+    <div class="ans-key" id="ansA">✅ Answer Key: 1-B, 2-C, 3-A, 4-E, 5-D, 6-G, 7-F, 8-I, 9-H, 10-J</div>
+    <button class="show-ans-btn" onclick="toggleAns('ansA',this)">👁 Show Answer Key</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION B — MCQ
+══════════════════════════════════════════ -->
+<div class="section sec-b">
+  <div class="section-header">
+    <h2>🔘 SECTION B — Multiple Choice Questions</h2>
+    <span class="marks-badge">20 Marks</span>
+  </div>
+  <div class="section-body">
+    <div class="instructions">Click the correct English meaning for each Hindi word. Each correct answer = 1 mark.</div>
+    <div class="mcq-grid" id="mcqGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION C — Pronouns Fill in the Blank
+══════════════════════════════════════════ -->
+<div class="section sec-c">
+  <div class="section-header">
+    <h2>👤 SECTION C — Fill in the Blanks: Pronouns</h2>
+    <span class="marks-badge">15 Marks</span>
+  </div>
+  <div class="section-body">
+    <div class="instructions">Fill in the correct Hindi pronoun. The English pronoun is given in brackets.</div>
+
+    <!-- Pronoun reference mini-table -->
+    <table class="verb-table" style="margin-bottom:16px">
+      <thead>
+        <tr>
+          <th>Person</th>
+          <th>Subject (Who)</th>
+          <th>Object (To whom)</th>
+          <th>Possessive (Whose)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1st — I</td><td class="hindi-cell">मैं (Main)</td><td class="hindi-cell">मुझे (Mujhe)</td><td class="hindi-cell">मेरा/मेरी/मेरे</td></tr>
+        <tr><td>2nd — You</td><td class="hindi-cell">तुम/आप (Tum/Aap)</td><td class="hindi-cell">तुम्हे/आपको</td><td class="hindi-cell">तुम्हारा/तुम्हारी/तुम्हारे</td></tr>
+        <tr><td>3rd Mas — He</td><td class="hindi-cell">वह (Veh)</td><td class="hindi-cell">उसे (Use)</td><td class="hindi-cell">उसका/उसके</td></tr>
+        <tr><td>3rd Fem — She</td><td class="hindi-cell">वह (Veh)</td><td class="hindi-cell">उसे (Use)</td><td class="hindi-cell">उसकी/उसके</td></tr>
+        <tr><td>1st Plural — We</td><td class="hindi-cell">हम (Hum)</td><td class="hindi-cell">हमे (Hume)</td><td class="hindi-cell">हमारा/हमारी/हमारे</td></tr>
+        <tr><td>2nd Plural — You all</td><td class="hindi-cell">तुम सब / आप सब</td><td class="hindi-cell">तुम्हे / आपको</td><td class="hindi-cell">तुम्हारा/तुम्हारी/तुम्हारे</td></tr>
+      </tbody>
+    </table>
+
+    <div class="fill-list" id="pronounFill"></div>
+    <div class="ans-key" id="ansC" style="white-space:pre-line;font-family:'Noto Sans Devanagari',sans-serif;font-size:14px"></div>
+    <button class="show-ans-btn" onclick="toggleAns('ansC',this)">👁 Show Answers</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION D — Verb Tenses
+══════════════════════════════════════════ -->
+<div class="section sec-d">
+  <div class="section-header">
+    <h2>⏳ SECTION D — Verb Tenses: Present / Past / Future</h2>
+    <span class="marks-badge">20 Marks</span>
+  </div>
+  <div class="section-body">
+    <div class="instructions">Reference table below. Then fill in the Hindi sentences for each tense.</div>
+    <table class="verb-table">
+      <thead>
+        <tr><th>Verb (English)</th><th>Present (Hindi)</th><th>Past (Hindi)</th><th>Future (Hindi)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>I run fast</td><td class="hindi-cell">मैं तेज दौड़ता हूँ</td><td class="hindi-cell">मैं तेज दौड़ा</td><td class="hindi-cell">मैं तेज दौडूँगा</td></tr>
+        <tr><td>I sit</td><td class="hindi-cell">मैं बैठता हूँ</td><td class="hindi-cell">मैं बैठ गया</td><td class="hindi-cell">मैं बैठूँगा</td></tr>
+        <tr><td>I meet</td><td class="hindi-cell">मैं मिलता हूँ</td><td class="hindi-cell">मैं मिला</td><td class="hindi-cell">मैं मिलूँगा</td></tr>
+        <tr><td>I give</td><td class="hindi-cell">मैं देता हूँ</td><td class="hindi-cell">मैंने दिया</td><td class="hindi-cell">मैं दूँगा</td></tr>
+        <tr><td>I take</td><td class="hindi-cell">मैं लेता हूँ</td><td class="hindi-cell">मैंने लिया</td><td class="hindi-cell">मैं लूँगा</td></tr>
+        <tr><td>I send</td><td class="hindi-cell">मैं भेजता हूँ</td><td class="hindi-cell">मैंने भेजा</td><td class="hindi-cell">मैं भेजूँगा</td></tr>
+        <tr><td>I read newspaper</td><td class="hindi-cell">मैं अखबार पढ़ता हूँ</td><td class="hindi-cell">मैंने अखबार पढ़ा</td><td class="hindi-cell">मैं अखबार पढ़ूँगा</td></tr>
+        <tr><td>I build</td><td class="hindi-cell">मैं बनाता हूँ</td><td class="hindi-cell">मैंने बनाया</td><td class="hindi-cell">मैं बनाऊँगा</td></tr>
+      </tbody>
+    </table>
+    <hr class="divider">
+    <p style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px">📝 Now fill in the Hindi sentences:</p>
+    <div id="tenseFill"></div>
+    <div class="ans-key" id="ansD" style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;white-space:pre-line"></div>
+    <button class="show-ans-btn" onclick="toggleAns('ansD',this)">👁 Show Answers</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION E — Hindi → English
+══════════════════════════════════════════ -->
+<div class="section sec-e">
+  <div class="section-header">
+    <h2>🔤 SECTION E — Translate Hindi → English</h2>
+    <span class="marks-badge">15 Marks</span>
+  </div>
+  <div class="section-body">
+    <div class="instructions">Write the English meaning of each Hindi word/phrase in the box.</div>
+    <div class="trans-grid" id="transHE"></div>
+    <div class="ans-key" id="ansE"></div>
+    <button class="show-ans-btn" onclick="toggleAns('ansE',this)">👁 Show Answers</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION F — English → Hindi
+══════════════════════════════════════════ -->
+<div class="section sec-f">
+  <div class="section-header">
+    <h2>🔤 SECTION F — Translate English → Hindi</h2>
+    <span class="marks-badge">10 Marks</span>
+  </div>
+  <div class="section-body">
+    <div class="instructions">Write the Hindi word (with pronunciation) for each English word given.</div>
+    <div class="trans-grid" id="transEH"></div>
+    <div class="ans-key" id="ansF" style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px"></div>
+    <button class="show-ans-btn" onclick="toggleAns('ansF',this)">👁 Show Answers</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     BONUS — Quick Word Recall
+══════════════════════════════════════════ -->
+<div class="section sec-bonus">
+  <div class="section-header">
+    <h2>⭐ BONUS — Quick Word Recall</h2>
+    <span class="marks-badge">+5 Marks</span>
+  </div>
+  <div class="section-body">
+    <div class="instructions">Write the Hindi word for each English word below — from your vocabulary list!</div>
+    <div class="bonus-grid" id="bonusGrid"></div>
+    <div class="ans-key" id="ansBonus" style="font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;white-space:pre-line"></div>
+    <button class="show-ans-btn" onclick="toggleAns('ansBonus',this)">👁 Show Answers</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<div style="text-align:center;padding:20px;font-size:12px;color:var(--muted);">
+  Gnanaguru Academy &nbsp;|&nbsp; 324 Trichy Road, Singanallur, Coimbatore – 641005<br>
+  www.gnanaguruacademy.in
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ── DATA ─────────────────────────────────────────────
+const mcqData = [
+  { q: "सोमवार", rom: "Somvaar", opts: ["Tuesday","Wednesday","Monday","Friday"], ans: 2 },
+  { q: "गुरुवार", rom: "Guruvaar", opts: ["Sunday","Thursday","Saturday","Wednesday"], ans: 1 },
+  { q: "शनिवार", rom: "Shanivaar", opts: ["Monday","Friday","Sunday","Saturday"], ans: 3 },
+  { q: "रविवार", rom: "Ravivaar", opts: ["Monday","Saturday","Sunday","Tuesday"], ans: 2 },
+  { q: "बुधवार", rom: "Budhvaar", opts: ["Monday","Wednesday","Friday","Thursday"], ans: 1 },
+  { q: "आलू", rom: "Aloo", opts: ["Carrot","Potato","Onion","Spinach"], ans: 1 },
+  { q: "गाजर", rom: "Gajar", opts: ["Tomato","Radish","Carrot","Cauliflower"], ans: 2 },
+  { q: "बैंगन", rom: "Baingan", opts: ["Pumpkin","Brinjal/Eggplant","Spinach","Capsicum"], ans: 1 },
+  { q: "सेब", rom: "Seb", opts: ["Mango","Banana","Orange","Apple"], ans: 3 },
+  { q: "आम", rom: "Aam", opts: ["Mango","Papaya","Guava","Pear"], ans: 0 },
+  { q: "अनार", rom: "Anaar", opts: ["Grapes","Pomegranate","Pear","Orange"], ans: 1 },
+  { q: "गुलाब", rom: "Gulab", opts: ["Jasmine","Sunflower","Rose","Hibiscus"], ans: 2 },
+  { q: "चमेली", rom: "Chameli", opts: ["Marigold","Lily","Jasmine","Magnolia"], ans: 2 },
+  { q: "लाल", rom: "Laal", opts: ["Blue","Yellow","Green","Red"], ans: 3 },
+  { q: "नीला", rom: "Neela", opts: ["Black","Brown","Blue","White"], ans: 2 },
+  { q: "काला", rom: "Kaala", opts: ["White","Black","Brown","Pink"], ans: 1 },
+  { q: "हाथी", rom: "Haathi", opts: ["Tiger","Lion","Elephant","Deer"], ans: 2 },
+  { q: "शेर", rom: "Sher", opts: ["Tiger","Lion","Bear","Deer"], ans: 1 },
+  { q: "मोर", rom: "Mor", opts: ["Parrot","Sparrow","Peacock","Crow"], ans: 2 },
+  { q: "गुलाबी", rom: "Gulabi (flower)", opts: ["Rose","Hibiscus","Pink flower","Magnolia"], ans: 1 },
+];
+
+const pronounData = [
+  { q: "________ (I) am learning Hindi.", ans: "मैं (Main)" },
+  { q: "________ (My) name is Ravi.", ans: "मेरा (Mera)" },
+  { q: "________ (You) are my friend. [informal]", ans: "तुम (Tum)" },
+  { q: "________ (Your) book is on the table. [formal]", ans: "आपकी (Aapki)" },
+  { q: "________ (He/She) is going to school.", ans: "वह (Veh)" },
+  { q: "________ (His) father is a teacher.", ans: "उसका (Uska)" },
+  { q: "________ (We) are students.", ans: "हम (Hum)" },
+  { q: "________ (Our) class is on Monday.", ans: "हमारी (Humari)" },
+  { q: "Give ________ (me) the book.", ans: "मुझे (Mujhe)" },
+  { q: "Tell ________ (him/her) the answer.", ans: "उसे (Use)" },
+  { q: "________ (Her) cat is white.", ans: "उसकी (Uski)" },
+  { q: "Help ________ (us) please.", ans: "हमे (Hume)" },
+  { q: "________ (You all) are welcome. [plural formal]", ans: "आप सब (Aap sab)" },
+  { q: "________ (My – feminine) sister is here.", ans: "मेरी (Meri)" },
+  { q: "________ (Their) house is beautiful.", ans: "उनका (Unka)" },
+];
+
+const tenseData = [
+  { q: "I <b>eat</b> food.", badge: "present", ans: "मैं खाना खाता हूँ।" },
+  { q: "She <b>went</b> to school.", badge: "past", ans: "वह स्कूल गई।" },
+  { q: "We <b>will read</b> the newspaper.", badge: "future", ans: "हम अखबार पढ़ेंगे।" },
+  { q: "He <b>stood</b> near the pond.", badge: "past", ans: "वह तालाब के पास खड़ा था।" },
+  { q: "I <b>will meet</b> my teacher on Monday.", badge: "future", ans: "मैं सोमवार को अपने शिक्षक से मिलूँगा।" },
+  { q: "They <b>bring</b> fruits from the market.", badge: "present", ans: "वे बाजार से फल लाते हैं।" },
+  { q: "She <b>will draw</b> a beautiful picture.", badge: "future", ans: "वह एक सुंदर चित्र बनाएगी।" },
+  { q: "I <b>waited</b> at the bus stop.", badge: "past", ans: "मैं बस स्टॉप पर इंतजार किया।" },
+  { q: "We <b>will build</b> a new house.", badge: "future", ans: "हम एक नया घर बनाएंगे।" },
+  { q: "He <b>found</b> his book on the table.", badge: "past", ans: "उसने अपनी किताब मेज पर पाई।" },
+];
+
+const transHEData = [
+  ["किताब (Kitaab)", "Book"], ["मेज (Mez)", "Table"],
+  ["कलम (Kalam)", "Pen"], ["पेड़ (Ped)", "Tree"],
+  ["गाय (Gaay)", "Cow"], ["छुट्टी (Chhuti)", "Holiday"],
+  ["दुकान (Dukaan)", "Shop"], ["मदद (Madad)", "Help"],
+  ["शादी (Shaadi)", "Marriage"], ["तालाब (Taalab)", "Pond"],
+  ["जुलूस (Juloos)", "Procession"], ["दफ्तर (Daftar)", "Office"],
+  ["चिड़िया-घर (Chidiya-Ghar)", "Zoo"], ["भाषण (Bhashan)", "Speech"],
+  ["सुबह (Subah)", "Morning"],
+];
+
+const transEHData = [
+  ["Lion", "शेर (Sher)"], ["Tiger", "बाघ (Baagh)"],
+  ["Elephant", "हाथी (Haathi)"], ["Parrot", "तोता (Tota)"],
+  ["Sparrow", "गौरैया (Gauraiya)"], ["Sunflower", "सुन्दरा (Sundara)"],
+  ["Marigold", "गेंदा (Genda)"], ["Spinach", "पालक (Palak)"],
+  ["Bottle gourd", "लौकी (Lauki)"], ["Guava", "आमरूद (Aamrood)"],
+];
+
+const bonusData = [
+  ["Dream","सपना (Sapna)"], ["Child","बच्चा (Baccha)"],
+  ["Woman","औरत (Aurat)"], ["Garden","बाग (Baag)"],
+  ["Village","गाँव (Gaanv)"], ["Teacher","अध्यापक (Adhyapak)"],
+  ["Beautiful","सुंदर (Sundar)"], ["Day","दिन (Din)"],
+  ["Yes","हाँ (Haan)"], ["Bag","थैली (Thaili)"],
+  ["Poetry","कविता (Kavita)"], ["Both","दोनों (Donon)"],
+  ["Cat","बिल्ली (Billi)"], ["Morning","सुबह (Subah)"],
+  ["Holiday","छुट्टी (Chhuti)"],
+];
+
+// ── RENDER MCQ ───────────────────────────────────────
+function buildMCQ() {
+  const grid = document.getElementById('mcqGrid');
+  mcqData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'mcq-item';
+    div.innerHTML = `
+      <div class="mcq-question">
+        <span class="qnum">${i+1}</span>
+        <span><span class="hindi">${item.q}</span> <span style="font-size:12px;color:#888">(${item.rom})</span> means:</span>
+      </div>
+      <div class="mcq-options">
+        ${item.opts.map((o,j)=>`
+          <div class="mcq-option" data-q="${i}" data-opt="${j}" onclick="selectMCQ(${i},${j})">
+            <span class="opt-label">${['A','B','C','D'][j]}</span> ${o}
+          </div>`).join('')}
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+const mcqSelected = {};
+function selectMCQ(q, opt) {
+  mcqSelected[q] = opt;
+  document.querySelectorAll(`[data-q="${q}"]`).forEach(el => el.classList.remove('selected'));
+  document.querySelector(`[data-q="${q}"][data-opt="${opt}"]`).classList.add('selected');
+  updateProgress();
+}
+
+// ── RENDER PRONOUN FILL ──────────────────────────────
+function buildPronounFill() {
+  const list = document.getElementById('pronounFill');
+  const ansLines = [];
+  pronounData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'fill-item';
+    div.innerHTML = `
+      <span class="fill-num">${i+1}</span>
+      <div class="fill-text">
+        ${item.q.replace('________', `<input class="fill-input" id="pf${i}" placeholder="Hindi...">`)}
+        <div class="fill-ans" id="pfa${i}">✅ ${item.ans}</div>
+      </div>`;
+    list.appendChild(div);
+    ansLines.push(`${i+1}. ${item.ans}`);
+  });
+  document.getElementById('ansC').textContent = '✅ Answers:\n' + ansLines.join('\n');
+}
+
+// ── RENDER TENSE FILL ────────────────────────────────
+function buildTenseFill() {
+  const cont = document.getElementById('tenseFill');
+  const ansLines = [];
+  tenseData.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'tense-item';
+    const badgeClass = `badge-${item.badge}`;
+    div.innerHTML = `
+      <div class="tense-q">
+        ${i+1}. ${item.q}
+        <span class="badge ${badgeClass}">${item.badge.charAt(0).toUpperCase()+item.badge.slice(1)}</span>
+      </div>
+      <input class="tense-write" id="tf${i}" placeholder="Write the Hindi sentence here...">
+      <div class="tense-hint" id="th${i}">✅ ${item.ans}</div>`;
+    cont.appendChild(div);
+    ansLines.push(`${i+1}. ${item.ans}`);
+  });
+  document.getElementById('ansD').textContent = '✅ Answers:\n' + ansLines.join('\n');
+}
+
+// ── RENDER TRANSLATE HE ──────────────────────────────
+function buildTransHE() {
+  const grid = document.getElementById('transHE');
+  const ansLines = [];
+  transHEData.forEach(([h, e], i) => {
+    const div = document.createElement('div');
+    div.className = 'trans-item';
+    div.innerHTML = `
+      <span class="trans-num">${i+1}</span>
+      <span class="hindi" style="font-size:15px;color:var(--purple);min-width:140px">${h}</span>
+      <span style="color:#aaa;font-size:18px;">→</span>
+      <input class="trans-input" id="the${i}" placeholder="English...">`;
+    grid.appendChild(div);
+    ansLines.push(`${i+1}. ${h} = ${e}`);
+  });
+  document.getElementById('ansE').textContent = '✅ Answers: ' + transHEData.map(([h,e],i)=>`${i+1}) ${e}`).join(', ');
+}
+
+// ── RENDER TRANSLATE EH ──────────────────────────────
+function buildTransEH() {
+  const grid = document.getElementById('transEH');
+  const ansLines = [];
+  transEHData.forEach(([e, h], i) => {
+    const div = document.createElement('div');
+    div.className = 'trans-item';
+    div.innerHTML = `
+      <span class="trans-num" style="background:var(--light-purple);color:var(--purple)">${i+1}</span>
+      <span style="font-weight:600;min-width:110px">${e}</span>
+      <span style="color:#aaa;font-size:18px;">→</span>
+      <input class="trans-input" id="teh${i}" placeholder="Hindi..." style="font-family:'Noto Sans Devanagari',sans-serif;font-size:15px">`;
+    grid.appendChild(div);
+    ansLines.push(`${i+1}. ${e} = ${h}`);
+  });
+  document.getElementById('ansF').textContent = '✅ Answers:\n' + ansLines.join('\n');
+}
+
+// ── RENDER BONUS ─────────────────────────────────────
+function buildBonus() {
+  const grid = document.getElementById('bonusGrid');
+  const ansLines = [];
+  bonusData.forEach(([e, h], i) => {
+    const div = document.createElement('div');
+    div.className = 'bonus-item';
+    div.innerHTML = `
+      <div class="eng">${i+1}. ${e}</div>
+      <input class="bonus-ans-input" id="bon${i}" placeholder="Hindi...">`;
+    grid.appendChild(div);
+    ansLines.push(`${i+1}. ${e} = ${h}`);
+  });
+  document.getElementById('ansBonus').textContent = '✅ Answers:\n' + ansLines.join('\n');
+}
+
+// ── TOGGLE ANSWER KEY ────────────────────────────────
+function toggleAns(id, btn) {
+  const el = document.getElementById(id);
+  const visible = el.style.display === 'block';
+  el.style.display = visible ? 'none' : 'block';
+  btn.textContent = visible ? '👁 Show Answers' : '🙈 Hide Answers';
+}
+
+// ── CHECK ALL ────────────────────────────────────────
+function checkAll() {
+  let score = 0;
+
+  // Section A — match
+  document.querySelectorAll('.match-input').forEach(inp => {
+    const userVal = inp.value.trim().toUpperCase();
+    const correct = inp.dataset.ans.toUpperCase();
+    inp.classList.remove('correct','wrong');
+    if (userVal === correct) { inp.classList.add('correct'); score += 2; }
+    else if (userVal) { inp.classList.add('wrong'); }
+  });
+
+  // Section B — MCQ
+  mcqData.forEach((item, i) => {
+    const opts = document.querySelectorAll(`[data-q="${i}"]`);
+    opts.forEach(o => o.classList.remove('correct-ans','wrong-ans','selected'));
+    opts[item.ans].classList.add('correct-ans');
+    if (mcqSelected[i] !== undefined) {
+      if (mcqSelected[i] === item.ans) score += 1;
+      else opts[mcqSelected[i]]?.classList.add('wrong-ans');
+    }
+  });
+
+  // Show all answer keys
+  ['ansA','ansC','ansD','ansE','ansF','ansBonus'].forEach(id => {
+    document.getElementById(id).style.display = 'block';
+  });
+  pronounData.forEach((_,i) => { document.getElementById('pfa'+i).style.display = 'block'; });
+  tenseData.forEach((_,i) => { document.getElementById('th'+i).style.display = 'block'; });
+
+  document.getElementById('liveScore').textContent = score;
+  document.getElementById('progressFill').style.width = (score/100*100) + '%';
+
+  // Update btn labels
+  document.querySelectorAll('.show-ans-btn').forEach(b => { b.textContent = '🙈 Hide Answers'; });
+  document.querySelectorAll('.ans-key').forEach(k => k.style.display = 'block');
+
+  document.getElementById('liveScore').textContent = score;
+}
+
+function showAllAnswers() {
+  ['ansA','ansC','ansD','ansE','ansF','ansBonus'].forEach(id => {
+    document.getElementById(id).style.display = 'block';
+  });
+  pronounData.forEach((_,i) => { document.getElementById('pfa'+i).style.display='block'; });
+  tenseData.forEach((_,i) => { document.getElementById('th'+i).style.display='block'; });
+  mcqData.forEach((item,i) => {
+    document.querySelectorAll(`[data-q="${i}"]`)[item.ans].classList.add('correct-ans');
+  });
+  document.querySelectorAll('.show-ans-btn').forEach(b=>b.textContent='🙈 Hide Answers');
+}
+
+function showResult() {
+  const score = parseInt(document.getElementById('liveScore').textContent) || 0;
+  const panel = document.getElementById('resultPanel');
+  document.getElementById('finalScore').textContent = score;
+  document.getElementById('resultGrade').textContent = '/ 100';
+  let msg = '', grade = '';
+  if (score >= 90) { grade = '🏆 Outstanding!'; msg = 'Excellent work! You have mastered the basics of Hindi.'; }
+  else if (score >= 75) { grade = '🌟 Very Good!'; msg = 'Great performance! Keep practising the remaining areas.'; }
+  else if (score >= 60) { grade = '👍 Good'; msg = 'Good effort! Review the sections you found difficult and try again.'; }
+  else if (score >= 40) { grade = '📚 Keep Practising'; msg = 'You are on the right track. Revise the vocabulary and pronouns more.'; }
+  else { grade = '💪 Keep Going!'; msg = 'Do not give up! Review the study material and try again.'; }
+  document.getElementById('resultGrade').textContent = `/ 100 — ${grade}`;
+  document.getElementById('resultMsg').textContent = msg;
+  panel.style.display = 'block';
+  panel.scrollIntoView({ behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const filled =
+    document.querySelectorAll('.match-input').length -
+    [...document.querySelectorAll('.match-input')].filter(i=>!i.value).length +
+    Object.keys(mcqSelected).length;
+  const total = 10 + 20;
+  document.getElementById('progressFill').style.width = Math.min(100, filled/total*100) + '%';
+}
+
+// ── INIT ─────────────────────────────────────────────
+buildMCQ();
+buildPronounFill();
+buildTenseFill();
+buildTransHE();
+buildTransEH();
+buildBonus();
+</script>
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hindi Mock Test — Category Wise | Gnanaguru Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1a237e; --blue:#283593; --indigo:#3949ab;
+  --light-blue:#e8eaf6; --green:#1b5e20; --light-green:#e8f5e9;
+  --red:#b71c1c; --purple:#4a148c; --light-purple:#f3e5f5;
+  --white:#fff; --bg:#f0f2ff; --text:#1a1a2e; --muted:#555577; --border:#c5cae9;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.hindi{font-family:'Noto Sans Devanagari',sans-serif}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#1a237e 0%,#283593 50%,#3949ab 100%);color:#fff;padding:32px 24px 24px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,255,255,.07) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.05) 0%,transparent 50%)}
+.header-logo{font-size:13px;letter-spacing:3px;text-transform:uppercase;opacity:.8;margin-bottom:8px;position:relative;z-index:1}
+.header h1{font-size:clamp(22px,5vw,34px);font-weight:800;letter-spacing:-.5px;margin-bottom:6px;position:relative;z-index:1}
+.header p{font-size:14px;opacity:.85;margin-bottom:20px;position:relative;z-index:1}
+.info-bar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.info-chip{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:6px 16px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px}
+
+/* SCORE BAR */
+.score-bar{background:#fff;border-bottom:2px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(26,35,126,.1)}
+.score-display{font-size:15px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px}
+.score-num{font-size:22px;color:var(--green)}
+.score-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:8px 18px;border-radius:8px;border:none;font-family:'Poppins',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:var(--indigo);transform:translateY(-1px)}
+.btn-secondary{background:var(--light-blue);color:var(--navy)}.btn-secondary:hover{background:var(--border)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#2e7d32;transform:translateY(-1px)}
+.progress-bar{height:4px;background:var(--light-blue);overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--green));transition:width .4s ease;width:0%}
+
+/* CONTAINER */
+.container{max-width:900px;margin:0 auto;padding:24px 16px 48px}
+
+/* CATEGORY GRID */
+.home-title{text-align:center;padding:20px 0 10px}
+.home-title h2{font-size:20px;font-weight:700;color:var(--navy)}
+.home-title p{font-size:13px;color:var(--muted);margin-top:4px}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:20px}
+.cat-card{border-radius:16px;overflow:hidden;cursor:pointer;box-shadow:0 2px 16px rgba(26,35,126,.1);border:1px solid var(--border);transition:transform .2s,box-shadow .2s}
+.cat-card:hover{transform:translateY(-3px);box-shadow:0 6px 24px rgba(26,35,126,.18)}
+.cat-card-header{padding:18px 20px 14px;color:#fff;display:flex;align-items:center;gap:12px}
+.cat-icon{font-size:28px}
+.cat-card-header h3{font-size:15px;font-weight:700}
+.cat-card-header p{font-size:12px;opacity:.85;margin-top:2px}
+.cat-card-footer{background:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted)}
+.cat-count{font-weight:700;color:var(--navy)}
+.cat-start{background:var(--light-blue);color:var(--navy);padding:4px 12px;border-radius:12px;font-weight:600;font-size:11px}
+
+/* SECTION */
+.section{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:24px;box-shadow:0 2px 16px rgba(26,35,126,.08);border:1px solid var(--border)}
+.section-header{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.section-header h2{font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.marks-badge{background:rgba(255,255,255,.25);border-radius:12px;padding:3px 10px;font-size:12px;font-weight:600;color:#fff}
+.sec-match .section-header{background:linear-gradient(90deg,#1a237e,#283593)}
+.sec-fill .section-header{background:linear-gradient(90deg,#1b5e20,#2e7d32)}
+.sec-mcq .section-header{background:linear-gradient(90deg,#4a148c,#6a1b9a)}
+.section-body{padding:18px 20px}
+.instructions{font-size:13px;color:var(--muted);margin-bottom:14px;padding:10px 14px;background:var(--light-blue);border-radius:8px;border-left:3px solid var(--indigo)}
+
+/* MATCH TABLE */
+.match-table{width:100%;border-collapse:collapse;font-size:13.5px}
+.match-table th{background:var(--light-blue);color:var(--navy);padding:10px 12px;font-weight:700;text-align:left;border-bottom:2px solid var(--border)}
+.match-table td{padding:9px 12px;border-bottom:1px solid #e8eaf6;vertical-align:middle}
+.match-table tr:last-child td{border-bottom:none}
+.match-table tr:hover td{background:#f8f9ff}
+.match-table .hindi-cell{font-family:'Noto Sans Devanagari',sans-serif;font-size:16px;color:var(--purple)}
+.match-input{width:60px;padding:5px 8px;border:2px solid var(--border);border-radius:6px;font-family:'Poppins',sans-serif;font-size:13px;text-align:center;text-transform:uppercase;transition:border-color .2s}
+.match-input:focus{outline:none;border-color:var(--indigo)}
+.match-input.correct{border-color:var(--green);background:var(--light-green)}
+.match-input.wrong{border-color:var(--red);background:#fff8f8}
+
+/* FILL IN BLANK */
+.fill-list{display:grid;gap:10px}
+.fill-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:10px;border:1.5px solid var(--border);font-size:13.5px}
+.fill-num{background:var(--green);color:#fff;min-width:26px;height:26px;border-radius:6px;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.fill-text{flex:1;line-height:1.9}
+.fill-eng{font-weight:600;color:var(--navy)}
+.fill-input{display:inline-block;border:none;border-bottom:2px solid var(--indigo);font-family:'Noto Sans Devanagari',sans-serif;font-size:15px;color:var(--purple);width:200px;padding:0 4px;background:transparent;text-align:center}
+.fill-input:focus{outline:none;border-bottom-color:var(--navy)}
+.fill-input.correct{border-bottom-color:var(--green);background:rgba(27,94,32,.05)}
+.fill-input.wrong{border-bottom-color:var(--red);background:rgba(183,28,28,.04)}
+.fill-ans{font-size:12px;color:var(--green);font-weight:600;display:none;margin-top:4px;font-family:'Noto Sans Devanagari',sans-serif;font-size:14px}
+
+/* MCQ */
+.mcq-grid{display:grid;gap:14px}
+.mcq-item{border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+.mcq-item:hover{border-color:var(--indigo)}
+.mcq-question{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:10px;display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.qnum{background:var(--purple);color:#fff;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.mcq-options{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mcq-option{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:8px;border:1.5px solid var(--border);cursor:pointer;font-size:13px;transition:all .15s;user-select:none}
+.mcq-option:hover{border-color:var(--purple);background:var(--light-purple)}
+.mcq-option.selected{border-color:var(--purple);background:var(--light-purple)}
+.mcq-option.correct-ans{border-color:var(--green)!important;background:var(--light-green)!important;color:var(--green);font-weight:600}
+.mcq-option.wrong-ans{border-color:var(--red)!important;background:#fff0f0!important;color:var(--red)}
+.opt-label{width:22px;height:22px;border-radius:50%;background:var(--light-purple);color:var(--purple);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ANSWER KEY */
+.ans-key{margin-top:14px;padding:10px 14px;background:var(--light-green);border-radius:8px;border-left:3px solid var(--green);font-size:12.5px;color:var(--green);font-weight:600;display:none}
+.show-ans-btn{margin-top:12px;padding:7px 16px;border-radius:8px;border:1.5px solid var(--green);background:#fff;color:var(--green);font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.show-ans-btn:hover{background:var(--light-green)}
+
+/* RESULT PANEL */
+.result-panel{display:none;background:#fff;border-radius:16px;border:2px solid var(--green);padding:28px;text-align:center;margin-bottom:24px;box-shadow:0 4px 24px rgba(27,94,32,.15)}
+.result-panel h2{font-size:24px;color:var(--navy);margin-bottom:8px}
+.result-score{font-size:48px;font-weight:800;color:var(--green);line-height:1}
+.result-grade{font-size:18px;color:var(--muted);margin:8px 0 16px}
+.result-msg{font-size:14px;color:var(--navy)}
+
+/* TEST NAV */
+.test-nav{background:#fff;border-radius:12px;padding:14px 20px;margin-bottom:20px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(26,35,126,.08);border:1px solid var(--border)}
+.test-nav h2{font-size:17px;font-weight:700;color:var(--navy)}
+.cat-badge{background:var(--light-blue);color:var(--navy);padding:3px 12px;border-radius:12px;font-size:12px;font-weight:600;font-family:'Noto Sans Devanagari',sans-serif}
+
+/* REF TABLE */
+.ref-wrap{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:24px;box-shadow:0 2px 16px rgba(26,35,126,.08);border:1px solid var(--border)}
+.ref-header{padding:12px 20px;background:linear-gradient(90deg,#0d47a1,#1565c0);display:flex;justify-content:space-between;align-items:center}
+.ref-header h3{color:#fff;font-size:14px;font-weight:700}
+.ref-toggle{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;padding:4px 12px;border-radius:8px;font-size:12px;cursor:pointer;font-family:'Poppins',sans-serif}
+.ref-body{padding:16px 20px;display:none;overflow-x:auto}
+.verb-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.verb-table th{background:#e3f2fd;color:#0d47a1;padding:9px 10px;font-weight:700;text-align:left;border:1px solid #bbdefb}
+.verb-table td{padding:8px 10px;border:1px solid #e3f2fd;vertical-align:middle}
+.verb-table tr:nth-child(even) td{background:#f8fbff}
+.verb-table .hindi-cell{font-family:'Noto Sans Devanagari',sans-serif;font-size:14px;color:var(--purple)}
+
+hr.divider{border:none;border-top:1px solid var(--border);margin:14px 0}
+
+@media(max-width:600px){
+  .mcq-options{grid-template-columns:1fr}
+  .cat-grid{grid-template-columns:1fr 1fr}
+  .score-bar{padding:10px 14px}
+  .fill-input{width:150px}
+}
+@media(max-width:400px){.cat-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">🌙 Gnanaguru Academy</div>
+  <h1>Hindi Mock Test</h1>
+  <p>Category-wise Self Evaluation &nbsp;|&nbsp; Learn Hindi through English</p>
+  <div class="info-bar">
+    <div class="info-chip">📚 9 Categories</div>
+    <div class="info-chip">🎯 Match · Fill · MCQ</div>
+    <div class="info-chip">✅ Answers included</div>
+  </div>
+</div>
+
+<!-- SCORE BAR (test only) -->
+<div class="score-bar" id="scoreBar" style="display:none">
+  <div class="score-display">
+    Score: <span class="score-num" id="liveScore">0</span> / <span id="maxScore">28</span>
+  </div>
+  <div class="score-actions">
+    <button class="btn btn-secondary" onclick="showAllAnswers()">👁 Show All</button>
+    <button class="btn btn-primary" onclick="checkAll()">✅ Check All</button>
+    <button class="btn btn-green" onclick="showResult()">🏆 Result</button>
+    <button class="btn btn-secondary" onclick="goHome()">🏠 Home</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="container">
+
+<!-- HOME PAGE -->
+<div id="homePage">
+  <div class="home-title">
+    <h2>Choose a Category</h2>
+    <p>Select any topic below to start your practice test — Match · Fill in Blank · MCQ</p>
+  </div>
+  <div class="cat-grid" id="catGrid"></div>
+</div>
+
+<!-- TEST PAGE -->
+<div id="testPage" style="display:none">
+
+  <div class="result-panel" id="resultPanel">
+    <h2>🎉 Your Result</h2>
+    <div class="result-score" id="finalScore">0</div>
+    <div class="result-grade" id="resultGrade">/ 28</div>
+    <div class="result-msg" id="resultMsg"></div>
+  </div>
+
+  <div class="test-nav">
+    <button class="btn btn-secondary" onclick="goHome()" style="flex-shrink:0">← Back</button>
+    <div>
+      <h2 id="testTitle">Category</h2>
+      <span class="cat-badge" id="testSubtitle"></span>
+    </div>
+  </div>
+
+  <!-- Reference table (Time1 / Pronouns) -->
+  <div class="ref-wrap" id="refWrap" style="display:none">
+    <div class="ref-header">
+      <h3 id="refTitle">📖 Reference Table</h3>
+      <button class="ref-toggle" onclick="toggleRef()">Show / Hide</button>
+    </div>
+    <div class="ref-body" id="refBody"></div>
+  </div>
+
+  <!-- PART 1: MATCH -->
+  <div class="section sec-match">
+    <div class="section-header">
+      <h2>📝 Part 1 — Match the Meaning</h2>
+      <span class="marks-badge" id="matchBadge">10 Marks</span>
+    </div>
+    <div class="section-body">
+      <div class="instructions">Match the Hindi word/phrase to its correct English meaning from Column B. Write the letter in "Your Answer".</div>
+      <div id="matchWrap"></div>
+      <div class="ans-key" id="ansMatch"></div>
+      <button class="show-ans-btn" onclick="toggleAns('ansMatch',this)">👁 Show Answer Key</button>
+    </div>
+  </div>
+
+  <!-- PART 2: FILL -->
+  <div class="section sec-fill">
+    <div class="section-header">
+      <h2>✏️ Part 2 — Write the Hindi</h2>
+      <span class="marks-badge" id="fillBadge">8 Marks</span>
+    </div>
+    <div class="section-body">
+      <div class="instructions">Write the correct Hindi word or phrase for each English item given.</div>
+      <div class="fill-list" id="fillList"></div>
+      <div class="ans-key" id="ansFill" style="white-space:pre-line;font-family:'Noto Sans Devanagari',sans-serif;font-size:14px"></div>
+      <button class="show-ans-btn" onclick="toggleAns('ansFill',this)">👁 Show Answers</button>
+    </div>
+  </div>
+
+  <!-- PART 3: MCQ -->
+  <div class="section sec-mcq">
+    <div class="section-header">
+      <h2>🔘 Part 3 — Multiple Choice</h2>
+      <span class="marks-badge" id="mcqBadge">10 Marks</span>
+    </div>
+    <div class="section-body">
+      <div class="instructions">Click the correct English meaning for each Hindi word or phrase.</div>
+      <div class="mcq-grid" id="mcqGrid"></div>
+      <div class="ans-key" id="ansMCQ" style="white-space:pre-line"></div>
+      <button class="show-ans-btn" onclick="toggleAns('ansMCQ',this)">👁 Show Answers</button>
+    </div>
+  </div>
+
+</div><!-- /testPage -->
+
+</div><!-- /container -->
+
+<div style="text-align:center;padding:20px;font-size:12px;color:var(--muted)">
+  Gnanaguru Academy &nbsp;|&nbsp; 324 Trichy Road, Singanallur, Coimbatore – 641005<br>
+  www.gnanaguruacademy.in
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const D = {
+subject:[
+  {e:"I",h:"मैं",r:"Main"},{e:"We",h:"हम",r:"Hum"},
+  {e:"You (informal)",h:"तू",r:"Tu"},{e:"You (plural)",h:"तुम",r:"Tum"},
+  {e:"You (formal)",h:"आप",r:"Aap"},{e:"He / She / It",h:"वह",r:"Vah"},
+  {e:"This",h:"यह",r:"Yah"},{e:"They",h:"वे",r:"Ve"},
+],
+question:[
+  {e:"Who",h:"कौन",r:"Kaun"},{e:"What",h:"क्या",r:"Kya"},
+  {e:"When",h:"कब",r:"Kab"},{e:"Where",h:"कहाँ",r:"Kahaan"},
+  {e:"How",h:"कैसे",r:"Kaise"},{e:"How much / many",h:"कितना",r:"Kitna"},
+  {e:"Why",h:"क्यों",r:"Kyon"},{e:"Who did / Whom",h:"किसने",r:"Kisne"},
+],
+verb1:[
+  {e:"To be",h:"होना",r:"Hona"},{e:"To go",h:"जाना",r:"Jana"},
+  {e:"To come",h:"आना",r:"Aana"},{e:"To do",h:"करना",r:"Karna"},
+  {e:"To eat",h:"खाना",r:"Khana"},{e:"To drink",h:"पीना",r:"Pina"},
+  {e:"To speak",h:"बोलना",r:"Bolna"},{e:"To sleep",h:"सोना",r:"Sona"},
+  {e:"To walk",h:"चलना",r:"Chalna"},{e:"To see / watch",h:"देखना",r:"Dekhna"},
+  {e:"To listen",h:"सुनना",r:"Sunna"},{e:"To understand",h:"समझना",r:"Samajhna"},
+  {e:"To meet",h:"मिलना",r:"Milna"},{e:"To wake up",h:"जागना",r:"Jagna"},
+  {e:"To read",h:"पढ़ना",r:"Padhna"},{e:"To write",h:"लिखना",r:"Likhna"},
+  {e:"To play",h:"खेलना",r:"Khelna"},{e:"To think",h:"सोचना",r:"Sochna"},
+  {e:"To save",h:"बचाना",r:"Bachana"},{e:"To laugh",h:"हँसना",r:"Hasna"},
+],
+verb2:[
+  {e:"Hello",h:"नमस्ते",r:"Namaste"},{e:"Thank You",h:"धन्यवाद",r:"Dhanyavaad"},
+  {e:"Excuse Me",h:"माफ कीजिये",r:"Maaf kijiye"},{e:"Yes",h:"हाँ",r:"Haan"},
+  {e:"No",h:"नहीं",r:"Nahin"},{e:"Please",h:"कृपया",r:"Kripaya"},
+  {e:"Here",h:"यहाँ",r:"Yahaan"},{e:"There",h:"वहाँ",r:"Vahaan"},
+  {e:"Why",h:"क्यों",r:"Kyon"},{e:"Because",h:"क्योंकि",r:"Kyunki"},
+  {e:"All",h:"सब",r:"Sab"},{e:"Very",h:"बहुत",r:"Bahut"},
+  {e:"Small",h:"छोटा",r:"Chota"},{e:"Big",h:"बड़ा",r:"Bada"},
+  {e:"Cold",h:"ठंडा",r:"Thanda"},{e:"Hot",h:"गरम",r:"Garm"},
+  {e:"Good",h:"अच्छा",r:"Achha"},{e:"Bad",h:"बुरा",r:"Bura"},
+  {e:"Open",h:"खुला",r:"Khula"},{e:"Closed",h:"बंद",r:"Band"},
+  {e:"Up",h:"ऊपर",r:"Upar"},{e:"Down",h:"नीचे",r:"Niche"},
+  {e:"Right",h:"दायें",r:"Dayen"},{e:"Left",h:"बायें",r:"Bayen"},
+  {e:"Food",h:"खाना",r:"Khana"},{e:"Water",h:"पानी",r:"Paani"},
+  {e:"Tea",h:"चाय",r:"Chai"},{e:"Milk",h:"दूध",r:"Doodh"},
+  {e:"Friend",h:"दोस्त",r:"Dost"},{e:"Today",h:"आज",r:"Aaj"},
+  {e:"Tomorrow",h:"कल",r:"Kal"},{e:"Now",h:"अब",r:"Ab"},
+  {e:"Sometimes",h:"कभी",r:"Kabhi"},{e:"Always",h:"हमेशा",r:"Hamesha"},
+  {e:"Happy",h:"खुशी",r:"Khushi"},{e:"Sad",h:"दुखी",r:"Dukhi"},
+  {e:"Love",h:"प्यार",r:"Pyaar"},{e:"Hate",h:"नफरत",r:"Nafrat"},
+  {e:"Work",h:"काम",r:"Kaam"},{e:"School",h:"विद्यालय",r:"Vidyalaya"},
+  {e:"Market",h:"बाज़ार",r:"Bazaar"},{e:"Money",h:"पैसा",r:"Paisa"},
+  {e:"Dream",h:"सपना",r:"Sapna"},{e:"Man",h:"आदमी",r:"Aadmi"},
+  {e:"Woman",h:"औरत",r:"Aurat"},{e:"Child",h:"बच्चा",r:"Baccha"},
+  {e:"Thirst",h:"प्यास",r:"Pyaas"},{e:"Hunger",h:"भूख",r:"Bhookh"},
+  {e:"Busy",h:"व्यस्त",r:"Vyast"},{e:"Delicious",h:"स्वादिष्ट",r:"Swadisht"},
+],
+general1:[
+  {e:"Red",h:"लाल",r:"Laal"},{e:"Green (color)",h:"हरा",r:"Hara"},
+  {e:"Blue",h:"नीला",r:"Neela"},{e:"Yellow",h:"पीला",r:"Peela"},
+  {e:"White",h:"सफ़ेद",r:"Safed"},{e:"Black",h:"काला",r:"Kaala"},
+  {e:"Brown",h:"भूरा",r:"Bhoora"},{e:"Pink",h:"गुलाबी",r:"Gulabi"},
+  {e:"Orange (color)",h:"नारंगी",r:"Narangi"},
+  {e:"Monday",h:"सोमवार",r:"Somvaar"},{e:"Tuesday",h:"मंगलवार",r:"Mangalvaar"},
+  {e:"Wednesday",h:"बुधवार",r:"Budhvaar"},{e:"Thursday",h:"गुरुवार",r:"Guruvaar"},
+  {e:"Friday",h:"शुक्रवार",r:"Shukravaar"},{e:"Saturday",h:"शनिवार",r:"Shanivaar"},
+  {e:"Sunday",h:"रविवार",r:"Ravivaar"},
+  {e:"Potato",h:"आलू",r:"Aloo"},{e:"Carrot",h:"गाजर",r:"Gajar"},
+  {e:"Onion",h:"प्याज",r:"Pyaaj"},{e:"Tomato",h:"टमाटर",r:"Tamatar"},
+  {e:"Spinach",h:"पालक",r:"Palak"},{e:"Capsicum",h:"शिमला मिर्च",r:"Shimla Mirch"},
+  {e:"Brinjal",h:"बैंगन",r:"Baingan"},{e:"Cauliflower",h:"गोभी",r:"Gobhi"},
+  {e:"Radish",h:"मूली",r:"Mooli"},{e:"Bottle gourd",h:"लौकी",r:"Lauki"},
+  {e:"Lady's finger",h:"भिंडी",r:"Bhindi"},
+  {e:"Apple",h:"सेब",r:"Seb"},{e:"Banana",h:"केला",r:"Kela"},
+  {e:"Mango",h:"आम",r:"Aam"},{e:"Orange (fruit)",h:"संतरा",r:"Santra"},
+  {e:"Grapes",h:"अंगूर",r:"Angoor"},{e:"Pomegranate",h:"अनार",r:"Anaar"},
+  {e:"Pear",h:"नाशपाती",r:"Nashpati"},{e:"Guava",h:"अमरूद",r:"Aamrood"},
+  {e:"Papaya",h:"पपीता",r:"Papita"},
+  {e:"Rose",h:"गुलाब",r:"Gulab"},{e:"Sunflower",h:"सुन्दरा",r:"Sundara"},
+  {e:"Jasmine",h:"चमेली",r:"Chameli"},{e:"Lily",h:"लिली",r:"Lily"},
+  {e:"Marigold",h:"गेंदा",r:"Genda"},{e:"Magnolia",h:"चम्पा",r:"Champa"},
+  {e:"Hibiscus",h:"गुड़हल",r:"Gudhal"},
+  {e:"Head",h:"सिर",r:"Sir"},{e:"Eye",h:"आँख",r:"Aankh"},
+  {e:"Ear",h:"कान",r:"Kaan"},{e:"Nose",h:"नाक",r:"Naak"},
+  {e:"Mouth",h:"मुँह",r:"Munh"},{e:"Throat",h:"गला",r:"Gala"},
+  {e:"Hand",h:"हाथ",r:"Haath"},{e:"Leg / Foot",h:"पैर",r:"Pair"},
+  {e:"Stomach",h:"पेट",r:"Pet"},{e:"Shoulder",h:"कंधा",r:"Kandha"},
+  {e:"Back",h:"पीठ",r:"Peeth"},{e:"Bone",h:"हड्डी",r:"Haddi"},
+],
+general2:[
+  {e:"Book",h:"किताब",r:"Kitaab"},{e:"Table",h:"मेज",r:"Mez"},
+  {e:"Pen",h:"कलम",r:"Kalam"},{e:"Floor",h:"ज़मीन",r:"Zameen"},
+  {e:"Cow",h:"गाय",r:"Gaay"},{e:"Ox",h:"बैल",r:"Bail"},
+  {e:"Tree",h:"पेड़",r:"Ped"},{e:"Domestic animal",h:"पालतू जानवर",r:"Paaltoo Janawar"},
+  {e:"Boy student",h:"छात्र",r:"Chhatr"},{e:"Girl student",h:"छात्रा",r:"Chhatra"},
+  {e:"Cat",h:"बिल्ली",r:"Billi"},{e:"Both",h:"दोनों",r:"Donon"},
+  {e:"Plant",h:"पौधा",r:"Paudha"},{e:"Village",h:"गाँव",r:"Gaanv"},
+  {e:"Mango tree",h:"आम का पेड़",r:"Aam ka Ped"},{e:"Beautiful",h:"सुंदर",r:"Sundar"},
+  {e:"Garden",h:"बाग",r:"Baag"},{e:"Teacher",h:"अध्यापक",r:"Adhyapak"},
+  {e:"Day",h:"दिन",r:"Din"},{e:"Poetess",h:"कवियत्री",r:"Kaviyatri"},
+  {e:"Yes",h:"हाँ",r:"Haan"},{e:"Bag",h:"थैली",r:"Thaili"},
+  {e:"Holiday",h:"छुट्टी",r:"Chhuti"},{e:"Health",h:"सेहत",r:"Sehat"},
+  {e:"Strike",h:"हड़ताल",r:"Hadtal"},{e:"Shop",h:"दुकान",r:"Dukaan"},
+  {e:"Post office",h:"डाक घर",r:"Daak Ghar"},{e:"Help",h:"मदद",r:"Madad"},
+  {e:"Servant",h:"नौकर",r:"Naukar"},{e:"Zoo",h:"चिड़िया-घर",r:"Chidiya-Ghar"},
+  {e:"Lion",h:"शेर",r:"Sher"},{e:"Elephant",h:"हाथी",r:"Haathi"},
+  {e:"Tiger",h:"बाघ",r:"Baagh"},{e:"Deer",h:"हिरण",r:"Hiran"},
+  {e:"Peacock",h:"मोर",r:"Mor"},{e:"Parrot",h:"तोता",r:"Tota"},
+  {e:"Sparrow",h:"गोरिया",r:"Gauraiya"},{e:"Marriage",h:"शादी",r:"Shaadi"},
+  {e:"Pond",h:"तालाब",r:"Taalab"},{e:"Procession",h:"जुलूस",r:"Juloos"},
+  {e:"Class / Group",h:"वर्ग",r:"Varg"},{e:"River",h:"नदी",r:"Nadi"},
+  {e:"Office",h:"दफ्तर",r:"Daftar"},{e:"Meeting",h:"सभा",r:"Sabha"},
+  {e:"Speech",h:"भाषण",r:"Bhashan"},{e:"Toy",h:"खिलौना",r:"Khilona"},
+  {e:"Morning",h:"सुबह",r:"Subah"},{e:"House",h:"घर",r:"Ghar"},
+  {e:"Building",h:"मकान",r:"Makaan"},
+],
+two_words:[
+  {e:"Come here",h:"आओ यहाँ",r:"Aao yahaan"},
+  {e:"Go outside",h:"जाओ बाहर",r:"Jao baahar"},
+  {e:"Help me",h:"मदद करो",r:"Madad karo"},
+  {e:"Stay quiet",h:"चुप रहो",r:"Chup raho"},
+  {e:"Walk slowly",h:"धीरे चलो",r:"Dheere chalo"},
+  {e:"Come quickly",h:"जल्दी आओ",r:"Jaldi aao"},
+  {e:"Stay calm",h:"शांत रहो",r:"Shaant raho"},
+  {e:"Pay attention",h:"ध्यान दो",r:"Dhyaan do"},
+  {e:"Sit here",h:"बैठो यहाँ",r:"Baitho yahaan"},
+  {e:"Stand there",h:"उठो वहाँ",r:"Utho vahaan"},
+  {e:"Let's play",h:"चलो खेलो",r:"Chalo khelo"},
+  {e:"Eat and drink",h:"खाओ पियो",r:"Khao piyo"},
+  {e:"Study and write",h:"पढ़ो लिखो",r:"Padho likho"},
+  {e:"Go to sleep",h:"सो जाओ",r:"So jao"},
+  {e:"Sing and dance",h:"गाओ नाचो",r:"Gao nacho"},
+  {e:"Laugh and smile",h:"हँसो मुस्कुराओ",r:"Hanso muskurao"},
+  {e:"Speak and listen",h:"बोलो सुनो",r:"Bolo suno"},
+  {e:"Think and do",h:"सोचो करो",r:"Socho karo"},
+  {e:"Read and understand",h:"पढ़ो समझो",r:"Padho samjho"},
+  {e:"Look and think",h:"देखो सोचो",r:"Dekho socho"},
+  {e:"Listen and understand",h:"सुनो समझो",r:"Suno samjho"},
+  {e:"Play and win",h:"खेलो जीतो",r:"Khelo jeeto"},
+  {e:"Let's eat",h:"चलो खाओ",r:"Chalo khao"},
+  {e:"Meet and talk",h:"मिलो बातो",r:"Milo baato"},
+  {e:"Run and catch",h:"दौड़ो पकड़ो",r:"Daudo pakdo"},
+],
+time1:[
+  {e:"I run fast (Present)",h:"मैं तेज़ दौड़ता हूँ",r:"Main tez daudta hoon"},
+  {e:"I ran fast (Past)",h:"मैं तेज़ दौड़ा",r:"Main tez dauda"},
+  {e:"I will run fast (Future)",h:"मैं तेज़ दौड़ूँगा",r:"Main tez daudunga"},
+  {e:"I jump (Present)",h:"मैं कूदता हूँ",r:"Main koodta hoon"},
+  {e:"I jumped (Past)",h:"मैंने कूदा",r:"Maine kooda"},
+  {e:"I will jump (Future)",h:"मैं कूदूँगा",r:"Main koodunga"},
+  {e:"I sit (Present)",h:"मैं बैठता हूँ",r:"Main baithta hoon"},
+  {e:"I sat (Past)",h:"मैं बैठा",r:"Main baitha"},
+  {e:"I will sit (Future)",h:"मैं बैठूँगा",r:"Main baithunga"},
+  {e:"I stand (Present)",h:"मैं खड़ा होता हूँ",r:"Main khada hota hoon"},
+  {e:"I stood (Past)",h:"मैं खड़ा हुआ",r:"Main khada hua"},
+  {e:"I will stand (Future)",h:"मैं खड़ा होऊँगा",r:"Main khada hounga"},
+  {e:"I meet (Present)",h:"मैं मिलता हूँ",r:"Main milta hoon"},
+  {e:"I met (Past)",h:"मैं मिला",r:"Main mila"},
+  {e:"I will meet (Future)",h:"मैं मिलूँगा",r:"Main milunga"},
+  {e:"I give (Present)",h:"मैं देता हूँ",r:"Main deta hoon"},
+  {e:"I gave (Past)",h:"मैंने दिया",r:"Maine diya"},
+  {e:"I will give (Future)",h:"मैं दूँगा",r:"Main dunga"},
+  {e:"I take (Present)",h:"मैं लेता हूँ",r:"Main leta hoon"},
+  {e:"I took (Past)",h:"मैंने लिया",r:"Maine liya"},
+  {e:"I will take (Future)",h:"मैं लूँगा",r:"Main lunga"},
+  {e:"I find (Present)",h:"मैं ढूँढता हूँ",r:"Main dhoodhta hoon"},
+  {e:"I found (Past)",h:"मैंने ढूँढा",r:"Maine dhoodha"},
+  {e:"I will find (Future)",h:"मैं ढूँढूँगा",r:"Main dhoodhunga"},
+  {e:"I bring (Present)",h:"मैं लाता हूँ",r:"Main laata hoon"},
+  {e:"I brought (Past)",h:"मैंने लाया",r:"Maine laaya"},
+  {e:"I will bring (Future)",h:"मैं लाऊँगा",r:"Main laaunga"},
+  {e:"I send (Present)",h:"मैं भेजता हूँ",r:"Main bhejta hoon"},
+  {e:"I sent (Past)",h:"मैंने भेजा",r:"Maine bheja"},
+  {e:"I will send (Future)",h:"मैं भेजूँगा",r:"Main bhejunga"},
+  {e:"I read newspaper (Present)",h:"मैं अखबार पढ़ता हूँ",r:"Main akhbaar padhta hoon"},
+  {e:"I read newspaper (Past)",h:"मैंने अखबार पढ़ा",r:"Maine akhbaar padha"},
+  {e:"I will read newspaper (Future)",h:"मैं अखबार पढूँगा",r:"Main akhbaar padhunga"},
+  {e:"I talk (Present)",h:"मैं बात करता हूँ",r:"Main baat karta hoon"},
+  {e:"I talked (Past)",h:"मैंने बात की",r:"Maine baat ki"},
+  {e:"I will talk (Future)",h:"मैं बात करूँगा",r:"Main baat karunga"},
+  {e:"I wait (Present)",h:"मैं इंतज़ार करता हूँ",r:"Main intazaar karta hoon"},
+  {e:"I waited (Past)",h:"मैंने इंतज़ार किया",r:"Maine intazaar kiya"},
+  {e:"I will wait (Future)",h:"मैं इंतज़ार करूँगा",r:"Main intazaar karunga"},
+  {e:"I draw (Present)",h:"मैं चित्र बनाता हूँ",r:"Main chitra banaata hoon"},
+  {e:"I drew (Past)",h:"मैंने चित्र बनाया",r:"Maine chitra banaaya"},
+  {e:"I will draw (Future)",h:"मैं चित्र बनाऊँगा",r:"Main chitra banaaunga"},
+  {e:"I build (Present)",h:"मैं बनाता हूँ",r:"Main banaata hoon"},
+  {e:"I built (Past)",h:"मैंने बनाया",r:"Maine banaaya"},
+  {e:"I will build (Future)",h:"मैं बनाऊँगा",r:"Main banaaunga"},
+],
+pronouns:[
+  {e:"I (Subject)",h:"मैं",r:"Main"},
+  {e:"We (Subject)",h:"हम",r:"Hum"},
+  {e:"You inf. (Subject)",h:"तुम",r:"Tum"},
+  {e:"You formal (Subject)",h:"आप",r:"Aap"},
+  {e:"He / She (Subject)",h:"वह",r:"Veh"},
+  {e:"They (Subject)",h:"वे",r:"Ve"},
+  {e:"You all (Subject)",h:"आप सब",r:"Aap sab"},
+  {e:"Me (Object)",h:"मुझे",r:"Mujhe"},
+  {e:"Us (Object)",h:"हमे",r:"Hume"},
+  {e:"You (Object — inf.)",h:"तुम्हे",r:"Tumhe"},
+  {e:"You (Object — formal)",h:"आपको",r:"Apko"},
+  {e:"Him / Her (Object)",h:"उसे",r:"Use"},
+  {e:"My — masc. (Possessive)",h:"मेरा",r:"Mera"},
+  {e:"My — fem. (Possessive)",h:"मेरी",r:"Meri"},
+  {e:"Our — masc. (Possessive)",h:"हमारा",r:"Humara"},
+  {e:"Our — fem. (Possessive)",h:"हमारी",r:"Humari"},
+  {e:"Your — masc. (Possessive)",h:"तुम्हारा",r:"Tumhara"},
+  {e:"Your — fem. (Possessive)",h:"तुम्हारी",r:"Tumhari"},
+  {e:"His (Possessive)",h:"उसका",r:"Uska"},
+  {e:"Her (Possessive)",h:"उसकी",r:"Uski"},
+],
+};
+
+const CATS = [
+  {id:'subject',  name:'Subject Pronouns',    desc:'मैं, हम, आप...',       icon:'👤', grad:['#1a237e','#3949ab']},
+  {id:'question', name:'Question Words',      desc:'कौन, क्या, कहाँ...',  icon:'❓', grad:['#0d47a1','#1565c0']},
+  {id:'verb1',    name:'Common Verbs — Set 1',desc:'होना, जाना, करना...',  icon:'🏃', grad:['#1b5e20','#388e3c']},
+  {id:'verb2',    name:'Vocabulary — Set 2',  desc:'नमस्ते, अच्छा, काम...', icon:'📖', grad:['#006064','#00838f']},
+  {id:'general1', name:'General 1',           desc:'Colors · Days · Fruits', icon:'🌈', grad:['#e65100','#f57c00']},
+  {id:'general2', name:'General 2',           desc:'Animals · Places · Nouns',icon:'🦁', grad:['#37474f','#546e7a']},
+  {id:'two_words',name:'Two-Word Commands',   desc:'आओ यहाँ, चलो खेलो...',icon:'💬', grad:['#b71c1c','#d32f2f']},
+  {id:'time1',    name:'Time 1 — Tenses',     desc:'Present · Past · Future', icon:'⏳', grad:['#4a148c','#7b1fa2'], ref:'tenses'},
+  {id:'pronouns', name:'Pronouns & Objects',  desc:'Subject · Object · Possessive',icon:'🔤', grad:['#004d40','#00695c'], ref:'pronouns'},
+];
+
+// State
+let matchItems=[], fillItems=[], mcqItems=[], mcqSel={};
+
+// ── UTILS ──────────────────────────────────────────
+function shuffle(a){
+  const arr=[...a];
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
+}
+function pick(arr,n){return shuffle(arr).slice(0,Math.min(n,arr.length));}
+
+function toggleAns(id,btn){
+  const el=document.getElementById(id);
+  const v=el.style.display==='block';
+  el.style.display=v?'none':'block';
+  btn.textContent=v?'👁 Show Answers':'🙈 Hide Answers';
+}
+function toggleRef(){
+  const b=document.getElementById('refBody');
+  b.style.display=b.style.display==='block'?'none':'block';
+}
+
+// ── BUILD HOME ─────────────────────────────────────
+function buildHome(){
+  const grid=document.getElementById('catGrid');
+  CATS.forEach(cat=>{
+    const card=document.createElement('div');
+    card.className='cat-card';
+    card.onclick=()=>startTest(cat.id);
+    card.innerHTML=`
+      <div class="cat-card-header" style="background:linear-gradient(135deg,${cat.grad[0]},${cat.grad[1]})">
+        <span class="cat-icon">${cat.icon}</span>
+        <div><h3>${cat.name}</h3><p class="hindi" style="font-size:13px;opacity:.9">${cat.desc}</p></div>
+      </div>
+      <div class="cat-card-footer">
+        <span class="cat-count">${D[cat.id].length} words</span>
+        <span class="cat-start">Start →</span>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ── START TEST ─────────────────────────────────────
+function startTest(catId){
+  const cat=CATS.find(c=>c.id===catId);
+  const data=D[catId];
+  mcqSel={};
+
+  matchItems=pick(data,10);
+  fillItems=pick(data,8);
+  mcqItems=pick(data,10);
+
+  document.getElementById('testTitle').textContent=cat.name;
+  document.getElementById('testSubtitle').textContent=cat.desc;
+  document.getElementById('matchBadge').textContent=matchItems.length+' Marks';
+  document.getElementById('fillBadge').textContent=fillItems.length+' Marks';
+  document.getElementById('mcqBadge').textContent=mcqItems.length+' Marks';
+  document.getElementById('maxScore').textContent=matchItems.length+fillItems.length+mcqItems.length;
+  document.getElementById('liveScore').textContent='0';
+  document.getElementById('progressFill').style.width='0%';
+  document.getElementById('resultPanel').style.display='none';
+  ['ansMatch','ansFill','ansMCQ'].forEach(id=>{document.getElementById(id).style.display='none';});
+  document.querySelectorAll('.show-ans-btn').forEach(b=>b.textContent='👁 Show Answers');
+
+  buildMatchSection(matchItems);
+  buildFillSection(fillItems);
+  buildMCQSection(mcqItems,data);
+  buildRefTable(cat);
+
+  document.getElementById('homePage').style.display='none';
+  document.getElementById('testPage').style.display='block';
+  document.getElementById('scoreBar').style.display='flex';
+  window.scrollTo(0,0);
+}
+
+function goHome(){
+  document.getElementById('homePage').style.display='block';
+  document.getElementById('testPage').style.display='none';
+  document.getElementById('scoreBar').style.display='none';
+}
+
+// ── MATCH ──────────────────────────────────────────
+function buildMatchSection(items){
+  const n=items.length;
+  const letters='ABCDEFGHIJ'.slice(0,n).split('');
+  const colBOrder=shuffle(items.map((_,i)=>i));
+  const correctLetter=items.map((_,i)=>letters[colBOrder.indexOf(i)]);
+
+  let rows='';
+  for(let i=0;i<n;i++){
+    rows+=`<tr>
+      <td>${i+1}</td>
+      <td class="hindi-cell">${items[i].h} <span style="font-family:Poppins;font-size:11px;color:#888">(${items[i].r})</span></td>
+      <td>${letters[i]}. ${items[colBOrder[i]].e}</td>
+      <td><input class="match-input" id="mat${i}" maxlength="1" placeholder="?" data-ans="${correctLetter[i]}" oninput="updateProgress()"></td>
+    </tr>`;
+  }
+
+  document.getElementById('matchWrap').innerHTML=`
+    <table class="match-table">
+      <thead><tr><th>#</th><th>Hindi Word</th><th>Column B (English)</th><th>Your Answer</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  document.getElementById('ansMatch').textContent='✅ Answer Key: '+items.map((it,i)=>`${i+1}–${correctLetter[i]}`).join(', ');
+}
+
+// ── FILL ───────────────────────────────────────────
+function buildFillSection(items){
+  const list=document.getElementById('fillList');
+  list.innerHTML='';
+  const lines=[];
+  items.forEach((item,i)=>{
+    const div=document.createElement('div');
+    div.className='fill-item';
+    div.innerHTML=`
+      <span class="fill-num">${i+1}</span>
+      <div class="fill-text">
+        <span class="fill-eng">${item.e}</span> →
+        <input class="fill-input" id="fil${i}" placeholder="Hindi..." oninput="updateProgress()">
+        <div class="fill-ans" id="fila${i}">✅ ${item.h} (${item.r})</div>
+      </div>`;
+    list.appendChild(div);
+    lines.push(`${i+1}. ${item.e} = ${item.h} (${item.r})`);
+  });
+  document.getElementById('ansFill').textContent='✅ Answers:\n'+lines.join('\n');
+}
+
+// ── MCQ ────────────────────────────────────────────
+function buildMCQSection(items,pool){
+  const grid=document.getElementById('mcqGrid');
+  grid.innerHTML='';
+  const lines=[];
+  items.forEach((item,i)=>{
+    const wrongs=shuffle(pool.filter(p=>p.e!==item.e)).slice(0,3);
+    const opts=shuffle([item.e,...wrongs.map(w=>w.e)]);
+    const correctIdx=opts.indexOf(item.e);
+
+    const div=document.createElement('div');
+    div.className='mcq-item';
+    div.innerHTML=`
+      <div class="mcq-question">
+        <span class="qnum">${i+1}</span>
+        <span class="hindi" style="font-size:18px;color:var(--purple)">${item.h}</span>
+        <span style="font-size:12px;color:#888;margin-left:4px">(${item.r})</span>
+      </div>
+      <div class="mcq-options">
+        ${opts.map((o,j)=>`
+          <div class="mcq-option" data-q="${i}" data-opt="${j}" data-correct="${j===correctIdx?1:0}" onclick="selectMCQ(${i},${j})">
+            <span class="opt-label">${['A','B','C','D'][j]}</span> ${o}
+          </div>`).join('')}
+      </div>`;
+    grid.appendChild(div);
+    lines.push(`${i+1}. ${item.h} = ${item.e}`);
+  });
+  document.getElementById('ansMCQ').textContent='✅ Answers:\n'+lines.join('\n');
+}
+
+function selectMCQ(q,opt){
+  mcqSel[q]=opt;
+  document.querySelectorAll(`[data-q="${q}"]`).forEach(el=>el.classList.remove('selected'));
+  document.querySelector(`[data-q="${q}"][data-opt="${opt}"]`).classList.add('selected');
+  updateProgress();
+}
+
+// ── REF TABLE ──────────────────────────────────────
+function buildRefTable(cat){
+  const wrap=document.getElementById('refWrap');
+  const body=document.getElementById('refBody');
+  body.style.display='none';
+  if(!cat.ref){wrap.style.display='none';return;}
+  wrap.style.display='block';
+
+  if(cat.ref==='tenses'){
+    document.getElementById('refTitle').textContent='📖 Reference: Verb Tense Table';
+    const rows=[
+      ['run fast','मैं तेज़ दौड़ता हूँ','मैं तेज़ दौड़ा','मैं तेज़ दौड़ूँगा'],
+      ['jump','मैं कूदता हूँ','मैंने कूदा','मैं कूदूँगा'],
+      ['sit','मैं बैठता हूँ','मैं बैठा','मैं बैठूँगा'],
+      ['stand','मैं खड़ा होता हूँ','मैं खड़ा हुआ','मैं खड़ा होऊँगा'],
+      ['meet','मैं मिलता हूँ','मैं मिला','मैं मिलूँगा'],
+      ['give','मैं देता हूँ','मैंने दिया','मैं दूँगा'],
+      ['take','मैं लेता हूँ','मैंने लिया','मैं लूँगा'],
+      ['find','मैं ढूँढता हूँ','मैंने ढूँढा','मैं ढूँढूँगा'],
+      ['bring','मैं लाता हूँ','मैंने लाया','मैं लाऊँगा'],
+      ['send','मैं भेजता हूँ','मैंने भेजा','मैं भेजूँगा'],
+      ['read newspaper','मैं अखबार पढ़ता हूँ','मैंने अखबार पढ़ा','मैं अखबार पढूँगा'],
+      ['talk','मैं बात करता हूँ','मैंने बात की','मैं बात करूँगा'],
+      ['wait','मैं इंतज़ार करता हूँ','मैंने इंतज़ार किया','मैं इंतज़ार करूँगा'],
+      ['draw','मैं चित्र बनाता हूँ','मैंने चित्र बनाया','मैं चित्र बनाऊँगा'],
+      ['build','मैं बनाता हूँ','मैंने बनाया','मैं बनाऊँगा'],
+    ];
+    body.innerHTML=`<table class="verb-table">
+      <thead><tr><th>I … (English)</th><th>Present</th><th>Past</th><th>Future</th></tr></thead>
+      <tbody>${rows.map(v=>`<tr><td>${v[0]}</td><td class="hindi-cell">${v[1]}</td><td class="hindi-cell">${v[2]}</td><td class="hindi-cell">${v[3]}</td></tr>`).join('')}</tbody>
+    </table>`;
+  } else if(cat.ref==='pronouns'){
+    document.getElementById('refTitle').textContent='📖 Reference: Pronouns Table';
+    body.innerHTML=`<table class="verb-table">
+      <thead><tr><th>Person</th><th>Subject (Who)</th><th>Object (To whom)</th><th>Possessive (Whose)</th></tr></thead>
+      <tbody>
+        <tr><td>1st — I</td><td class="hindi-cell">मैं (Main)</td><td class="hindi-cell">मुझे (Mujhe)</td><td class="hindi-cell">मेरा / मेरी / मेरे</td></tr>
+        <tr><td>2nd — You</td><td class="hindi-cell">तुम / आप</td><td class="hindi-cell">तुम्हे / आपको</td><td class="hindi-cell">तुम्हारा / तुम्हारी / तुम्हारे</td></tr>
+        <tr><td>3rd Mas — He</td><td class="hindi-cell">वह (Veh)</td><td class="hindi-cell">उसे (Use)</td><td class="hindi-cell">उसका / उसके</td></tr>
+        <tr><td>3rd Fem — She</td><td class="hindi-cell">वह (Veh)</td><td class="hindi-cell">उसे (Use)</td><td class="hindi-cell">उसकी / उसके</td></tr>
+        <tr><td>1st Plural — We</td><td class="hindi-cell">हम (Hum)</td><td class="hindi-cell">हमे (Hume)</td><td class="hindi-cell">हमारा / हमारी / हमारे</td></tr>
+        <tr><td>2nd Plural — You all</td><td class="hindi-cell">तुम सब / आप सब</td><td class="hindi-cell">तुम्हे / आपको</td><td class="hindi-cell">तुम्हारा / तुम्हारी / तुम्हारे</td></tr>
+      </tbody>
+    </table>`;
+  }
+}
+
+// ── CHECK ALL ──────────────────────────────────────
+function checkAll(){
+  let score=0;
+
+  matchItems.forEach((_,i)=>{
+    const inp=document.getElementById('mat'+i);
+    if(!inp)return;
+    const v=inp.value.trim().toUpperCase();
+    const c=inp.dataset.ans.toUpperCase();
+    inp.classList.remove('correct','wrong');
+    if(v===c){inp.classList.add('correct');score++;}
+    else if(v){inp.classList.add('wrong');}
+  });
+
+  fillItems.forEach((item,i)=>{
+    const inp=document.getElementById('fil'+i);
+    const ans=document.getElementById('fila'+i);
+    if(!inp)return;
+    const v=inp.value.trim();
+    inp.classList.remove('correct','wrong');
+    ans.style.display='block';
+    if(v===item.h.trim()){inp.classList.add('correct');score++;}
+    else if(v){inp.classList.add('wrong');}
+  });
+
+  mcqItems.forEach((_,i)=>{
+    const opts=document.querySelectorAll(`[data-q="${i}"]`);
+    opts.forEach(o=>o.classList.remove('correct-ans','wrong-ans','selected'));
+    opts.forEach(o=>{if(o.dataset.correct==='1')o.classList.add('correct-ans');});
+    if(mcqSel[i]!==undefined){
+      const sel=document.querySelector(`[data-q="${i}"][data-opt="${mcqSel[i]}"]`);
+      if(sel){
+        if(sel.dataset.correct==='1')score++;
+        else sel.classList.add('wrong-ans');
+      }
+    }
+  });
+
+  const total=matchItems.length+fillItems.length+mcqItems.length;
+  document.getElementById('liveScore').textContent=score;
+  document.getElementById('progressFill').style.width=(score/total*100)+'%';
+  ['ansMatch','ansFill','ansMCQ'].forEach(id=>document.getElementById(id).style.display='block');
+  document.querySelectorAll('.show-ans-btn').forEach(b=>b.textContent='🙈 Hide Answers');
+}
+
+function showAllAnswers(){
+  ['ansMatch','ansFill','ansMCQ'].forEach(id=>document.getElementById(id).style.display='block');
+  fillItems.forEach((_,i)=>{const a=document.getElementById('fila'+i);if(a)a.style.display='block';});
+  mcqItems.forEach((_,i)=>{
+    document.querySelectorAll(`[data-q="${i}"]`).forEach(o=>{if(o.dataset.correct==='1')o.classList.add('correct-ans');});
+  });
+  document.querySelectorAll('.show-ans-btn').forEach(b=>b.textContent='🙈 Hide Answers');
+}
+
+function showResult(){
+  const score=parseInt(document.getElementById('liveScore').textContent)||0;
+  const maxS=parseInt(document.getElementById('maxScore').textContent)||28;
+  const pct=score/maxS*100;
+  let grade='',msg='';
+  if(pct>=90){grade='🏆 Outstanding!';msg='Excellent! You have mastered this topic.';}
+  else if(pct>=75){grade='🌟 Very Good!';msg='Great performance! Keep practising.';}
+  else if(pct>=60){grade='👍 Good';msg='Good effort! Review the sections you found difficult.';}
+  else if(pct>=40){grade='📚 Keep Practising';msg='You are on the right track. Revise more and try again.';}
+  else{grade='💪 Keep Going!';msg='Do not give up! Review the study material and try again.';}
+  document.getElementById('finalScore').textContent=score;
+  document.getElementById('resultGrade').textContent=`/ ${maxS} — ${grade}`;
+  document.getElementById('resultMsg').textContent=msg;
+  const panel=document.getElementById('resultPanel');
+  panel.style.display='block';
+  panel.scrollIntoView({behavior:'smooth'});
+}
+
+function updateProgress(){
+  const n=matchItems.length+fillItems.length+mcqItems.length||28;
+  const mf=[...document.querySelectorAll('[id^="mat"]')].filter(i=>i.value.trim()).length;
+  const ff=[...document.querySelectorAll('[id^="fil"]')].filter(i=>i.value.trim()).length;
+  const qf=Object.keys(mcqSel).length;
+  document.getElementById('progressFill').style.width=Math.min(100,(mf+ff+qf)/n*100)+'%';
+}
+
+// ── INIT ───────────────────────────────────────────
+buildHome();
+</script>
+</body>
+</html>
